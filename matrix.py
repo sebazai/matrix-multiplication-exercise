@@ -3,6 +3,7 @@ import gc
 import time
 import sys
 import os.path
+import matplotlib.pyplot as plt
 # from memory_profiler import profile
 
 start_time = time.time()
@@ -10,8 +11,8 @@ start_time = time.time()
 # @profile
 def calculateMatrix(Ap=None, Bp=None, Cp=None):
   print("started at %s" % start_time)
-  # Sizes of matrices according to exercise definition
   if (Ap is None and Bp is None and Cp is None):
+    # Sizes of matrices according to exercise definition 
     matrix_size_one = 10**6
     matrix_size_two = 10**3
 
@@ -86,11 +87,32 @@ def calculateMatrix(Ap=None, Bp=None, Cp=None):
     print("--- %s seconds ---" % (time.time() - cycle_start))
     gc.collect()
 
-  # Make the result a 2D array and reshape it to be dimension x,1
+  # Make the result a 2D array and reshape it to be dimension X,1
   return_value = np.array([result]).reshape(-1, 1)
   print(return_value)
   print("--- %s seconds ---" % (time.time() - start_time))
   return return_value
 
+# Plot Matrix A row ECDF
+def ecdf(data):
+  length = len(data)
+  x = np.sort(data)
+  y = np.arange(1, length+1) / length
+  return x, y
+
+def plotCDF():
+  # Load A into memory
+  A = np.load('data/matrix_a.npy')
+
+  for i in range(10**3):
+    # print(i)
+    x, y = ecdf(A[:,i])
+    plt.plot(x, y, marker='.', linestyle='none', markersize=3)
+  # print("DONE")
+  plt.xlabel('Value')
+  plt.ylabel('ECDF')
+  plt.show()
+
 if __name__ == "__main__":
   calculateMatrix()
+  # plotCDF()

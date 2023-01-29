@@ -1,8 +1,10 @@
 import numpy as np
 import unittest
+from memory_profiler import profile
 
 # Works, but is A*(B*C)
 class TestMatrixMultiplication(unittest.TestCase):
+  @profile
   def test_matrix_multiplication(self):
     # Sizes of matrices according to exercise definition
     matrix_size_one = 10**6
