@@ -8,8 +8,8 @@ def calculateMatrix(Ap=None, Bp=None, Cp=None):
   print("started at %s" % start_time)
   # Sizes of matrices according to exercise definition
   if (Ap is None and Bp is None and Cp is None):
-    matrix_size_one = 10**4
-    matrix_size_two = 10**2
+    matrix_size_one = 10**5
+    matrix_size_two = 10**3
 
     # Matrice shapes
     A_shape = (matrix_size_one, matrix_size_two)
