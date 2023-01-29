@@ -2,7 +2,7 @@ import numpy as np
 import unittest
 from memory_profiler import profile
 
-# Works, but is A*(B*C)
+# Works, but is A*(B*C) and not (A*B)*C
 class TestMatrixMultiplication(unittest.TestCase):
   @profile
   def test_matrix_multiplication(self):
@@ -15,9 +15,9 @@ class TestMatrixMultiplication(unittest.TestCase):
     B_shape = (matrix_size_two, matrix_size_one)
     C_shape = (matrix_size_one, 1)
 
-    A = np.random.uniform(low=0.0001, high=0.9999, size=A_shape)
-    B = np.random.uniform(low=0.0001, high=0.9999, size=B_shape)
-    C = np.random.uniform(low=0.0001, high=0.9999, size=C_shape)
+    A = np.random.uniform(low=0.0001, high=1, size=A_shape)
+    B = np.random.uniform(low=0.0001, high=1, size=B_shape)
+    C = np.random.uniform(low=0.0001, high=1, size=C_shape)
     D = A @ (B @ C)
 
     # (A*B)*C = A*(B*C)

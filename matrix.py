@@ -10,6 +10,9 @@ start_time = time.time()
 
 # @profile
 def calculateMatrix(Ap=None, Bp=None, Cp=None):
+  print("Starting")
+  # time.sleep(30) was used only so that I have time to use psrecord to see mem/cpu usage.
+  # time.sleep(30)
   print("started at %s" % start_time)
   if (Ap is None and Bp is None and Cp is None):
     # Sizes of matrices according to exercise definition 
@@ -21,12 +24,13 @@ def calculateMatrix(Ap=None, Bp=None, Cp=None):
     B_shape = (matrix_size_two, matrix_size_one)
     C_shape = (matrix_size_one, 1)
 
+    # If Matrices are not on disk, create the
     if not (os.path.exists('data/matrix_a.npy') and os.path.exists('data/matrix_b.npy') and os.path.exists('data/matrix_c.npy')):
       # Create Matrix A, B, C into memory, (0,1), i.e. no 0 or 1 accepted
-      # np.random.rand can't be used, as its [0,1)
-      A = np.random.uniform(low=0.0001, high=0.9999, size=A_shape)
-      B = np.random.uniform(low=0.0001, high=0.9999, size=B_shape)
-      C = np.random.uniform(low=0.0001, high=0.9999, size=C_shape)
+      # np.random.rand can't be used, as its [0,1), np.random.rand is also unfiromly distributed
+      A = np.random.uniform(low=0.0001, high=1, size=A_shape)
+      B = np.random.uniform(low=0.0001, high=1, size=B_shape)
+      C = np.random.uniform(low=0.0001, high=1, size=C_shape)
       print("size of A in mem", sys.getsizeof(A))
 
       # Save matrices as data on hard drive, Matrix A and B will allocate 10^6*10^3*8 bytes of space, which is 8 Gigabytes
@@ -64,7 +68,7 @@ def calculateMatrix(Ap=None, Bp=None, Cp=None):
     cycle_start = time.time()
     print("i", i)
     for j in range(B_column_batches):
-      # print("j", j)
+      print("j", j)
       # Select sub matrix rows in batches from 2D A_mem, and all columns
       block_a = A_mem[i*batch_size:(i+1)*batch_size,:]
       # Select sub matrix columns in batches from 2D B_mem, and all rows

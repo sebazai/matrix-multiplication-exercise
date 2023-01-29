@@ -1,5 +1,10 @@
 # matrix-multiplication-exercise
 
+Deps:
+
+- Python 3.9
+- `pip install numpy matplotlib memory_profiler psrecord`
+
 ## Exercise description:
 
 ```
@@ -19,5 +24,4 @@ Using Python and Numpy.
 Making the assumption, that we need float64, i.e. double, we need 8 bytes for each element, so the required memory space for the Matrix A and B would be, `10^6*10^3*8bytes = 8000000000 bytes = 8 Gb*2 = 16 Gb`.
 Matrix C will require `10^6*8bytes = 8000000 bytes = 8 Mb`.
 
-These could be written to disk, as shown in the commented out code, but will do it all in memory.
-If we would use `np.dot(np.dot(A, B), C), yea, we would need many terabytes of memory, so we need to do it with [matrix blocks](https://en.wikipedia.org/wiki/Block_matrix).
+Implementation report can be found in `P1.pdf`
